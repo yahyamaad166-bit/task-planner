@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta name="google-site-verification" content="6P8J5zebR-fZ6NI9h7Dn5fXi0yHh3bQd9DNHlbuG6cU" />
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
 <title>Ultimate Task Planner</title>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -41,14 +40,6 @@ box-shadow:0 15px 40px rgba(0,0,0,0.3);
 text-align:center;
 }
 
-h1{
-margin-bottom:10px;
-}
-
-.inputs{
-margin-bottom:15px;
-}
-
 input{
 padding:10px;
 margin:5px;
@@ -77,21 +68,6 @@ margin-top:10px;
 border-radius:12px;
 box-shadow:0 5px 15px rgba(0,0,0,0.15);
 text-align:left;
-animation:fade 0.5s;
-}
-
-@keyframes fade{
-from{opacity:0;transform:translateY(10px);}
-to{opacity:1;transform:translateY(0);}
-}
-
-.task button{
-margin-top:5px;
-}
-
-.stats{
-margin-top:10px;
-font-weight:bold;
 }
 
 .dark{
@@ -123,12 +99,8 @@ margin:auto;
 <h1>🚀 Smart Task Planner</h1>
 <p>Plan your goals and track your progress</p>
 
-<div class="inputs">
-
 <input id="taskName" placeholder="Task name">
-
 <input id="startDate" type="date">
-
 <input id="endDate" type="date">
 
 <br>
@@ -136,12 +108,10 @@ margin:auto;
 <button onclick="addTask()">➕ Add Task</button>
 <button onclick="toggleDark()">🌙 Dark</button>
 
-</div>
-
 <h3>📊 Progress</h3>
 <canvas id="chart"></canvas>
 
-<div class="stats" id="stats"></div>
+<div id="stats"></div>
 
 <h3>📋 Tasks</h3>
 <div id="tasks"></div>
@@ -193,7 +163,8 @@ div.innerHTML=
 "<b>"+t.name+"</b><br>"+
 "📅 "+t.start+" → "+t.end+
 "<br>⏳ Remaining: "+days+" days"+
-"<br><button onclick='finishTask("+i+")'>Finish</button>"
+"<br><button onclick='finishTask("+i+")'>✅ Finish</button> "+
+"<button onclick='deleteTask("+i+")'>🗑 Delete</button>"
 
 if(t.done) div.style.textDecoration="line-through"
 
@@ -229,6 +200,21 @@ start:start,
 end:end,
 done:false
 })
+
+render()
+
+}
+
+function finishTask(i){
+
+tasks[i].done=true
+render()
+
+}
+
+function deleteTask(i){
+
+tasks.splice(i,1)
 
 render()
 
