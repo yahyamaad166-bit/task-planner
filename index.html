@@ -240,7 +240,14 @@ tasks[i].done=true
 render()
 
 }
+function deleteTask(i){
 
+tasks.splice(i,1)
+
+render("<button onclick='finishTask("+i+")'>Finish</button> "+
+"<button onclick='deleteTask("+i+")'>Delete</button>")
+
+}
 function toggleDark(){
 
 document.body.classList.toggle("dark")
